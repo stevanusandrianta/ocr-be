@@ -3,14 +3,14 @@ from continuumio/miniconda3
 COPY requirements.txt /
 
 RUN apt-get update -y
-RUN apt-get install -y git
-RUN apt-get install -y libgl1-mesa-glx
+RUN apt-get install -y tesseract-ocr
+
+RUN tesseract -v
 
 RUN conda install -c conda-forge opencv
+RUN apt-get install -y libgl1-mesa-glx
 
-RUN pip install -r /requirements.txt \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+RUN pip install -r /requirements.txt 
 
 # copy project module
 RUN mkdir /app/
